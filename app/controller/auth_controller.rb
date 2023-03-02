@@ -1,5 +1,5 @@
 class AuthController < ApplicationController
-  post "/users/login" do
+  post "/user/login" do
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       token = encode_token(user_id: user.id)
@@ -8,7 +8,7 @@ class AuthController < ApplicationController
       render json: { error: "Invalid email or password" }
     end
   end
-  delete "/users/logout" do
+  delete "/user/logout" do
     session.clear
     session.to_json
   end

@@ -1,10 +1,10 @@
 class MoviesController < ApplicationController
-  get '/users/:id/movies' do
+  get '/user/:id/movies' do
     @movies = current_user.movies
     render json: @movies
   end
 
-  post '/users/:id/movies' do
+  post '/user/:id/movie' do
     @movie = current_user.movies.build(movie_params)
     if @movie.save
       render json: @movie, status: :created
@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
     end
   end
 
-  patch '/users/:id/movies' do
+  patch '/user/:id/movie' do
     @movie = current_user.movies.find(params[:id])
     if @movie.update(movie_params)
       render json: @movie
@@ -21,7 +21,7 @@ class MoviesController < ApplicationController
       render json: { error: 'Failed to update movie' }, status: :unprocessable_entity
     end
 
-    delete '/users/:id/movies/:movie_id' do
+    delete '/user/:id/movie/:movie_id' do
         @movie = current_user.movies.find(params[:id])
         if @movie.delete(movie_params)
             render json: @movie
