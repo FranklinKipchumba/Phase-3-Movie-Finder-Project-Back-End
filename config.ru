@@ -12,9 +12,9 @@ end
 use Rack::JSONBodyParser
 
 # Our application
-run AuthController
+run ApplicationController
 
 use MoviesController
-use SessionsController
-use UserController
-run AuthController
+use AuthController
+use UsersController
+run ApplicationController
