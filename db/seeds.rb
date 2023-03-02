@@ -1,6 +1,6 @@
 User.destroy_all
 Movie.destroy_all
-puts "🌱 Seeding spices..."
+puts "Seeding spices...."
 user1 = User.create(user_name:"Frank Soft", email: 'fransoft@gmail.com', password: 'F98687')
 user2 = User.create(user_name:"Monica Sasile", email: 'monicasasile@gmail.com', password: '667759MS')
 
