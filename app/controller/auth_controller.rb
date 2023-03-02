@@ -1,4 +1,4 @@
-class Api::models::AuthController < ApplicationController
+class AuthController < ApplicationController
     def login
       user = User.find_by(email: params[:email])
       if user && user.authenticate(params[:password])

@@ -1,4 +1,4 @@
-class Api::models::MoviesController < ApplicationController
+class MoviesController < ApplicationController
   def index
     @movies = current_user.movies
     render json: @movies
