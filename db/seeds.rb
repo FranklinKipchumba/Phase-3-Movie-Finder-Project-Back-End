@@ -1,4 +1,6 @@
-
+User.destroy_all
+Movie.destroy_all
+puts "🌱 Seeding spices..."
 user1 = User.create(user_name:"Frank Soft", email: 'fransoft@gmail.com', password: 'F98687')
 user2 = User.create(user_name:"Monica Sasile", email: 'monicasasile@gmail.com', password: '667759MS')
 
@@ -9,3 +11,5 @@ movie3 = Movie.create(title: 'The Dark Knight', year: 2008, description: 'When t
 Review.create(user_id: user1.id, movie_id: movie1.id, star_rating: 4, comment: "Nice product")
 Review.create(user_id: user2.id, movie_id: movie2.id, star_rating: 5, comment: "Great product")
 Review.create(user_id: user1.id, movie_id: movie3.id, star_rating: 3, comment: "OK product")
+
+puts "✅ Done seeding!"
