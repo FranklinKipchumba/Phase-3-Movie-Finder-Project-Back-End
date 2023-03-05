@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Users < ActiveRecord::Base
   has_many :reviews
   has_many :movie, through: :reviews
 

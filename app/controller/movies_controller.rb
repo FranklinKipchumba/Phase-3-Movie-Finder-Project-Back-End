@@ -1,5 +1,5 @@
-class MoviesController < ApplicationController
-  get '/user/:id/movies' do
+class MovieController < ApplicationController
+  get '/user/:id/movie' do
     @movies = current_user.movies
     render json: @movies
   end
