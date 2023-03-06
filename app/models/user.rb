@@ -1,18 +1,6 @@
-class Users < ActiveRecord::Base
-  has_many :reviews
-  has_many :movie, through: :reviews
-
-  def favorite_movie
-    reviews.order(star_rating: :desc).first.movie
-  end
-
-  def remove_reviews(product)
-    reviews.where(movie_id: movie.id).delete_all
-  end
-
+class User < ActiveRecord::Base
   has_secure_password
-
-  validates :email, presence: true, uniqueness: true
-  validates :user_name, :presence => true, :uniqueness => true
+  validates :username, :presence => true, :uniqueness => true
   validates :password, :presence => true
+  has_many :movies
 end

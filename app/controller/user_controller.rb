@@ -1,20 +1,15 @@
-class UserController < ApplicationController
-    skip_before_action :authorized, only: [:create]
-  
-    def create
-      @user = User.create(user_params)
-      if @user.valid?
-        @token = encode_token(user_id: @user.id)
-        render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
-      else
-        render json: { error: 'Failed to create user' }, status: :unprocessable_entity
-      end
-    end
-  
-    private
-  
-    def user_params
-      params.permit(:email, :password)
-    end
+class UsersController < ApplicationController
+  get "/users" do
+      User.all.to_json
+  end
+
+  get "/users/:id" do
+      User.find_by(id: params[:id]).to_json
+  end
+
+  post '/users' do
+      user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = user.id
+      user.to_json
+  end
 end
-  

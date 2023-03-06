@@ -1,33 +1,35 @@
-class MovieController < ApplicationController
-  get '/user/:id/movie' do
-    @movies = current_user.movies
-    render json: @movies
+class MoviesController < ApplicationController
+  get '/users/:id/movies' do
+      movies =  Movies.where(user_id: params[:id])
+      movies.to_json
   end
 
-  post '/user/:id/movie' do
-    @movie = current_user.movies.build(movie_params)
-    if @movie.save
-      render json: @movie, status: :created
-    else
-      render json: { error: 'Failed to create movie' }, status: :unprocessable_entity
-    end
+  post '/users/:id/movies' do
+      movies =  Movies.where(user_id: params[:id])
+      movies.create(
+          title: params[:title],
+          category: params[:category],
+          description: params[:description],
+          user_id: params[:id]
+      )
+      movies.to_json
   end
 
-  patch '/user/:id/movie' do
-    @movie = current_user.movies.find(params[:id])
-    if @movie.update(movie_params)
-      render json: @movie
-    else
-      render json: { error: 'Failed to update movie' }, status: :unprocessable_entity
-    end
+  patch '/users/:id/movies/:movie_id' do
+      movies =  Movies.where(user_id: params[:id])
+      edit_movie = Movies.find(params[:movie_id])
+      edit_movie.update(
+          title: params[:title],
+          category: params[:category],
+          description: params[:description]
+      )
+      movies.to_json
+  end
 
-    delete '/user/:id/movie/:movie_id' do
-        @movie = current_user.movies.find(params[:id])
-        if @movie.delete(movie_params)
-            render json: @movie
-        else
-            render json: { error: 'Failed to delete movie'}, status: :unprocessable_entity
-        end
-    end
+  delete '/users/:id/movies/:movie_id' do
+      movies =  Movies.where(user_id: params[:id])
+      edit_movie = Movies.find(params[:movie_id])
+      edit_movie.destroy
+      movies.to_json
   end
 end
